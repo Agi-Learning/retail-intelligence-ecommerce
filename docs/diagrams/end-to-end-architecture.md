@@ -1,3 +1,8 @@
+---
+title: End-to-End Architecture
+sidebar_position: 2
+---
+
 # End-to-End Architecture
 
 [Diagram index](README.md) · [Architecture overview](../architecture/README.md)

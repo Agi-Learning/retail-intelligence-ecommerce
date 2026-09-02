@@ -1,9 +1,14 @@
+---
+title: End-to-End Architecture and 120-Lesson Roadmap
+sidebar_position: 2
+---
+
 # Retail Intelligence Platform
 
 ## End-to-End Web MFE, Microservices, Azure Databricks Data Mesh and 120-Lesson Implementation Roadmap
 
 **Prepared:** 2 September 2026  
-**Revision:** 3 — clean-start, commit-ready documentation for web-only frontend, micro-frontends, microservices, and domain-owned data products  
+**Revision:** 4 — Docusaurus-ready, clean-start documentation for web-only frontend, micro-frontends, microservices, and domain-owned data products  
 **Architecture style:** Web micro-frontends + domain microservices + event-driven integration + Azure Databricks data mesh + ML/Deep Learning + GenAI/RAG + governed agentic AI  
 **Target scale:** 20M+ records locally, expandable to 100M+ records and production streaming workloads  
 **Primary implementation languages:** TypeScript/React, Java/Spring Boot, Python/PySpark, SQL, Terraform/Bicep  
@@ -24,7 +29,15 @@ cd "$HOME/projects/retail-intelligence-ecommerce"
 scripts/validation/validate-structure.sh
 ```
 
-Then follow [Installation](../getting-started/installation.md), [Implementation workflow](../getting-started/implementation-workflow.md), [Learning evidence](../learning/README.md) and the [progress tracker](../learning/progress-tracker.md). The final vector architecture is [end-to-end-architecture.svg](../diagrams/end-to-end-architecture.svg).
+Then follow [Installation](../getting-started/installation.md), [Implementation workflow](../getting-started/implementation-workflow.md), [Docusaurus site](../getting-started/docusaurus.md), [Learning evidence](../learning/README.md) and the [progress tracker](../learning/progress-tracker.md). The final vector architecture is [end-to-end-architecture.svg](../diagrams/end-to-end-architecture.svg).
+
+Run the searchable documentation portal after creating the repository:
+
+```bash
+cd documentation-site
+npm ci
+npm start
+```
 
 Execution starts with architecture and ownership in Phase 1, not with every container or service. Phase 2 pins tools and creates a reproducible environment. The first runnable business slice is the Catalog MFE/BFF/service/database path; events, lakehouse, ML and AI are added in their planned phases after the previous evidence gates pass.
 

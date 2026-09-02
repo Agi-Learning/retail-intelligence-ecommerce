@@ -1,0 +1,197 @@
+.hero {
+  padding: clamp(4rem, 9vw, 8rem) 0;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 78% 12%, rgb(6 182 212 / 20%), transparent 26rem),
+    radial-gradient(circle at 18% 0%, rgb(37 99 235 / 18%), transparent 32rem),
+    linear-gradient(145deg, #07152c, #0f2852 58%, #063b4a);
+  color: #f8fafc;
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(18rem, 0.75fr);
+  align-items: center;
+  gap: clamp(2rem, 6vw, 6rem);
+}
+
+.hero h1 {
+  max-width: 13ch;
+  margin: 0.5rem 0 1rem;
+  color: #fff;
+  font-size: clamp(3rem, 7vw, 6.2rem);
+  line-height: 0.96;
+  letter-spacing: -0.06em;
+}
+
+.eyebrow {
+  margin: 0;
+  color: #22d3ee;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+.lead {
+  max-width: 49rem;
+  color: #cbd5e1;
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  line-height: 1.65;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 2rem;
+}
+
+.scope {
+  margin: 1rem 0 0;
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+.ruleCard {
+  padding: 2rem;
+  background: rgb(15 23 42 / 72%);
+  border: 1px solid rgb(103 232 249 / 35%);
+  border-radius: 1.2rem;
+  box-shadow: 0 2rem 5rem rgb(0 0 0 / 24%);
+  backdrop-filter: blur(14px);
+}
+
+.ruleCard p {
+  margin: 0 0 1.2rem;
+  color: #67e8f9;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+}
+
+.ruleCard h2 {
+  margin-bottom: 1rem;
+  color: #fff;
+  font-size: clamp(1.6rem, 3vw, 2.35rem);
+  letter-spacing: -0.035em;
+}
+
+.ruleCard span {
+  color: #cbd5e1;
+  line-height: 1.65;
+}
+
+.section {
+  padding: 5rem 0;
+}
+
+.sectionHeading {
+  max-width: 48rem;
+  margin-bottom: 2rem;
+}
+
+.sectionHeading .eyebrow {
+  color: var(--ifm-color-primary);
+}
+
+.sectionHeading h2 {
+  margin: 0.45rem 0 0;
+  font-size: clamp(2rem, 4vw, 3.3rem);
+  letter-spacing: -0.045em;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.2rem;
+}
+
+.card {
+  display: flex;
+  min-height: 18rem;
+  padding: 1.6rem;
+  flex-direction: column;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 1rem;
+  box-shadow: 0 1rem 3rem rgb(15 23 42 / 5%);
+}
+
+.card > span {
+  color: var(--ifm-color-primary);
+  font-weight: 800;
+}
+
+.card h3 {
+  margin: 1.5rem 0 0.6rem;
+  font-size: 1.45rem;
+}
+
+.card p {
+  color: var(--ifm-color-emphasis-700);
+}
+
+.card a {
+  margin-top: auto;
+  font-weight: 700;
+}
+
+.milestoneSection {
+  background: var(--ifm-color-emphasis-100);
+}
+
+.milestones {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.milestone {
+  display: grid;
+  grid-template-columns: 7rem 7rem 1fr;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1rem 1.2rem;
+  background: var(--ifm-background-surface-color);
+  border-radius: 0.75rem;
+}
+
+.milestone > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.milestone strong {
+  font-size: 1.35rem;
+}
+
+.milestone span {
+  color: var(--ifm-color-emphasis-600);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.milestone p {
+  margin: 0;
+  font-weight: 650;
+}
+
+@media (max-width: 996px) {
+  .heroGrid,
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .ruleCard {
+    max-width: 42rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .milestone {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .milestone p {
+    grid-column: 1 / -1;
+  }
+}

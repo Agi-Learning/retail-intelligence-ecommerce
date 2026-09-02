@@ -1,0 +1,16 @@
+# Docusaurus output
+.docusaurus/
+build/
+
+# Dependencies and local caches
+node_modules/
+.cache-loader/
+
+# Generated locally before start/build
+static/search-index.json
+
+# Logs and local environment
+npm-debug.log*
+.env
+.env.*
+!.env.example

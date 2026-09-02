@@ -11,6 +11,7 @@ An end-to-end learning and implementation monorepo covering:
 - Analytics, classical ML, deep learning, MLflow and model serving.
 - Governed RAG, multimodal processing and controlled agents.
 - Terraform, CI/CD, security, observability, DR, SRE and FinOps.
+- Docusaurus documentation generated directly from the authoritative `docs/` tree.
 
 ## Architectural boundaries
 
@@ -25,3 +26,11 @@ An end-to-end learning and implementation monorepo covering:
 ## Start
 
 Read docs/README.md and docs/roadmap/README.md before adding implementation.
+
+When `documentation-site/package.json` is present, run the documentation portal:
+
+```bash
+cd documentation-site
+npm ci
+npm start
+```

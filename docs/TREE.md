@@ -1,3 +1,7 @@
+---
+sidebar_position: 98
+---
+
 # Documentation Tree
 
 [Documentation home](README.md)
@@ -10,7 +14,8 @@ docs/
 ├── getting-started/
 │   ├── README.md
 │   ├── installation.md
-│   └── implementation-workflow.md
+│   ├── implementation-workflow.md
+│   └── docusaurus.md
 ├── architecture/
 │   ├── README.md
 │   ├── retail-intelligence-platform-architecture-and-roadmap.md
@@ -96,3 +101,25 @@ docs/
 3. The master architecture document describes the current system and target state.
 4. Focused guides and diagrams provide navigable views of the same design.
 5. Roadmap files define implementation order and evidence gates; they do not override accepted contracts or ADRs.
+
+## Documentation presentation layer
+
+```text
+documentation-site/
+├── docusaurus.config.ts
+├── sidebars.ts
+├── package.json
+├── scripts/
+│   └── build-search-index.mjs
+├── src/
+│   ├── css/custom.css
+│   └── pages/
+│       ├── index.tsx
+│       └── search.tsx
+└── static/
+    └── img/logo.svg
+```
+
+The site reads the tree above from `../docs`; it does not copy or generate a
+second set of Markdown pages. The only generated documentation artifact is the
+ignored local search index.

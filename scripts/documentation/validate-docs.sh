@@ -7,6 +7,7 @@ REPOSITORY_ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)
 DOCS_ROOT="$REPOSITORY_ROOT/docs"
 ROADMAP="$DOCS_ROOT/roadmap/all-120-lessons.md"
 MASTER="$DOCS_ROOT/architecture/retail-intelligence-platform-architecture-and-roadmap.md"
+DOCUSAURUS_ROOT="$REPOSITORY_ROOT/documentation-site"
 
 required_files=(
   "$DOCS_ROOT/README.md"
@@ -29,6 +30,32 @@ for required_file in "${required_files[@]}"; do
     exit 1
   fi
 done
+
+if [[ -f "$DOCUSAURUS_ROOT/package.json" ]]; then
+  docusaurus_files=(
+    "$DOCUSAURUS_ROOT/package-lock.json"
+    "$DOCUSAURUS_ROOT/docusaurus.config.ts"
+    "$DOCUSAURUS_ROOT/sidebars.ts"
+    "$DOCUSAURUS_ROOT/scripts/build-search-index.mjs"
+    "$DOCUSAURUS_ROOT/src/pages/index.tsx"
+    "$DOCUSAURUS_ROOT/src/pages/search.tsx"
+    "$DOCUSAURUS_ROOT/src/css/custom.css"
+    "$REPOSITORY_ROOT/.github/workflows/docs-docusaurus.yml"
+    "$DOCS_ROOT/getting-started/docusaurus.md"
+  )
+
+  for docusaurus_file in "${docusaurus_files[@]}"; do
+    if [[ ! -s "$docusaurus_file" ]]; then
+      printf 'Missing or empty Docusaurus file: %s\n' "$docusaurus_file" >&2
+      exit 1
+    fi
+  done
+
+  if [[ -d "$DOCUSAURUS_ROOT/docs" ]]; then
+    printf 'Docusaurus must render ../docs directly; remove duplicate documentation-site/docs.\n' >&2
+    exit 1
+  fi
+fi
 
 phase_count=$(grep -Ec '^### Phase ([1-9]|1[0-9]|2[0-4]) — ' "$ROADMAP")
 lesson_count=$(grep -Ec '^- \*\*L[0-9]{3}:\*\*' "$ROADMAP")
@@ -116,4 +143,57 @@ if failures:
     raise SystemExit(1)
 PY
 
-printf 'Documentation validation passed: 24 phases, 120 sequential lessons, required files and local links.\n'
+python3 - "$REPOSITORY_ROOT" <<'PY'
+from pathlib import Path
+import json
+import sys
+
+root = Path(sys.argv[1]).resolve()
+docs = root / "docs"
+
+for category_file in docs.rglob("_category_.json"):
+    try:
+        value = json.loads(category_file.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as error:
+        print(f"Invalid sidebar category JSON in {category_file}: {error}", file=sys.stderr)
+        raise SystemExit(1)
+    if not isinstance(value.get("label"), str) or not value["label"].strip():
+        print(f"Sidebar category requires a label: {category_file}", file=sys.stderr)
+        raise SystemExit(1)
+    if not isinstance(value.get("position"), int):
+        print(f"Sidebar category requires an integer position: {category_file}", file=sys.stderr)
+        raise SystemExit(1)
+
+site = root / "documentation-site"
+package_file = site / "package.json"
+if package_file.exists():
+    package = json.loads(package_file.read_text(encoding="utf-8"))
+    expected_version = "3.10.2"
+    required_packages = (
+        "@docusaurus/core",
+        "@docusaurus/preset-classic",
+        "@docusaurus/theme-mermaid",
+    )
+    dependencies = package.get("dependencies", {})
+    for dependency in required_packages:
+        if dependencies.get(dependency) != expected_version:
+            print(
+                f"{dependency} must be pinned to {expected_version}; "
+                f"found {dependencies.get(dependency)!r}.",
+                file=sys.stderr,
+            )
+            raise SystemExit(1)
+    if package.get("engines", {}).get("node") != ">=20.0":
+        print("documentation-site must require Node.js >=20.0.", file=sys.stderr)
+        raise SystemExit(1)
+
+    config = (site / "docusaurus.config.ts").read_text(encoding="utf-8")
+    if "path: '../docs'" not in config:
+        print("Docusaurus must use ../docs as its source.", file=sys.stderr)
+        raise SystemExit(1)
+    if "mermaid: true" not in config:
+        print("Docusaurus Mermaid rendering must remain enabled.", file=sys.stderr)
+        raise SystemExit(1)
+PY
+
+printf 'Documentation validation passed: 24 phases, 120 sequential lessons, required files, local links and Docusaurus configuration.\n'

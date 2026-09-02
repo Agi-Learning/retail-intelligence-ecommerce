@@ -43,6 +43,9 @@ node_modules/
 .nx/
 coverage/
 *.tsbuildinfo
+documentation-site/.docusaurus/
+documentation-site/build/
+documentation-site/static/search-index.json
 
 # Terraform
 **/.terraform/

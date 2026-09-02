@@ -1,6 +1,6 @@
 # Getting Started
 
-[Documentation home](../README.md) · [Installation](installation.md) · [Implementation workflow](implementation-workflow.md)
+[Documentation home](../README.md) · [Installation](installation.md) · [Implementation workflow](implementation-workflow.md) · [Docusaurus site](docusaurus.md)
 
 This is a clean start for the repository named `retail-intelligence-ecommerce`. It does not import code or generated output from `retail-intelligence-platform`.
 
@@ -36,4 +36,3 @@ Before `L001`, confirm that:
 - secrets are absent from tracked files;
 - version commands and Docker smoke checks pass;
 - the documentation links and lesson numbering validation pass.
-

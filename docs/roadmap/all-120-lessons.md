@@ -1,3 +1,8 @@
+---
+title: Complete 120-Lesson Implementation Roadmap
+sidebar_position: 2
+---
+
 # Complete 120-Lesson Implementation Roadmap
 
 [Roadmap index](README.md) · [Phases 1–10](phases-01-10.md) · [Phases 11–20](phases-11-20.md) · [Phases 21–24](phases-21-24.md) · [All 120 lessons](all-120-lessons.md)

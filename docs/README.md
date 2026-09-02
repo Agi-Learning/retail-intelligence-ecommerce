@@ -1,3 +1,11 @@
+---
+id: home
+slug: /
+title: Retail Intelligence Platform
+sidebar_label: Documentation home
+sidebar_position: 1
+---
+
 # Retail Intelligence Platform — End-to-End Architecture and Roadmap
 
 **Scope:** Web-only React/TypeScript micro-frontends, BFFs, Spring Boot microservices, event-driven integration, Azure Databricks data mesh, analytics, ML/deep learning, GenAI/RAG, governed agents and production operations.
@@ -11,6 +19,7 @@
 | Area | Start here | Contents |
 |---|---|---|
 | Start and installation | [Getting started](getting-started/README.md) | Clean repository creation, workstation checks and one-lesson implementation cycle |
+| Documentation website | [Docusaurus guide](getting-started/docusaurus.md) | Local preview, search, production build and GitHub Pages deployment |
 | Complete source of truth | [Master architecture and roadmap](architecture/retail-intelligence-platform-architecture-and-roadmap.md) | The complete architecture, decisions, products, phases and 120 lessons |
 | Documentation layout | [Documentation tree](TREE.md) | Every documentation file and its purpose |
 | Architecture | [Architecture overview](architecture/README.md) | System boundaries, principal flows and architecture rules |
@@ -101,3 +110,4 @@ Start with [installation](getting-started/installation.md), then execute `L001` 
 - Architecture changes require an ADR and matching diagram/document updates.
 - Published event and data-product contracts are versioned and compatibility-tested.
 - Broken relative links, invalid Mermaid blocks, missing lessons and duplicated lesson numbers fail documentation validation.
+- `docs/` is the authored source of truth. `documentation-site/` renders these files directly and must not contain a duplicate lesson tree.
