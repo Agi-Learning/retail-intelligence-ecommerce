@@ -1,0 +1,117 @@
+apiVersion: data.retail/v1
+kind: DataProduct
+
+metadata:
+  id: commerce.order-performance
+  name: Order Performance
+  domain: commerce
+  productType: aggregate
+  version: 1.0.0
+  status: proposed
+  owners:
+    business: commerce-product-owner
+    technical: commerce-data-team
+    support: commerce-data-oncall
+
+spec:
+  purpose: >-
+    Provide certified order-lifecycle, checkout-funnel and net-revenue
+    information for finance, operations, analytics and approved ML consumers.
+
+  consumers:
+    - id: finance-analytics
+      purpose: Financial reconciliation and certified revenue reporting
+      accessReviewEveryDays: 90
+    - id: demand-planning
+      purpose: Historical demand and cancellation features
+      accessReviewEveryDays: 90
+
+  inputs:
+    - id: commerce.order-events
+      type: event_stream
+      address: prod.commerce.order.lifecycle
+      schema: registry://commerce.order-lifecycle/2.0.0
+    - id: payment.payment-outcomes
+      type: event_stream
+      address: prod.payment.payment.outcomes
+      schema: registry://payment.payment-outcomes/1.2.0
+
+  outputs:
+    - id: fact-orders
+      type: delta_table
+      address: retail_prod_commerce.gold.fact_orders
+      schemaVersion: 1.0.0
+      access: unity-catalog
+    - id: order-performance-sql
+      type: sql_view
+      address: retail_prod_commerce.published.order_performance_v1
+      schemaVersion: 1.0.0
+      access: unity-catalog
+
+  semantics:
+    grain: One row per order
+    primaryKey:
+      - order_id
+    eventTime: order_created_at_utc
+    timezone: UTC
+    currencyRule: Monetary values retain transaction currency; converted measures declare rate and timestamp
+    measures:
+      net_revenue: Captured amount minus completed refunds, excluding cancelled orders
+      gross_merchandise_value: Confirmed item value before refunds; tax and shipping are separate
+
+  serviceLevels:
+    freshnessMinutes: 15
+    availabilityPercent: 99.9
+    recoveryTimeMinutes: 60
+    recoveryPointMinutes: 15
+    supportHours: 24x7-critical
+
+  quality:
+    unique:
+      - order_id
+    required:
+      - order_id
+      - customer_id
+      - order_status
+      - order_created_at_utc
+      - currency
+      - net_amount
+    maxInvalidPercent: 0.01
+    maxFreshnessMinutes: 15
+    reconcileTo: order-and-payment-ledgers
+    violationPolicy: quarantine-and-alert
+
+  governance:
+    classification: confidential
+    piiFields:
+      - customer_id
+    prohibitedFields:
+      - payment_card_number
+      - payment_cvv
+      - authentication_secret
+    retentionDays: 2555
+    deletionPolicy: Pseudonymize deleted-customer identifiers according to approved retention policy
+    purposeRequired: true
+    accessReviewEveryDays: 90
+
+  interoperability:
+    timestampFormat: ISO-8601-UTC
+    countryFormat: ISO-3166-1-alpha-2
+    currencyFormat: ISO-4217
+    compatibility: backward
+
+  operations:
+    runbook: ../operations/README.md
+    lineageSystem: unity-catalog
+    discoverySystem: microsoft-purview
+    dashboard: order-performance-product-health
+    costOwner: commerce
+    monthlyBudgetCurrency: USD
+    monthlyBudgetAmount: 500
+
+  lifecycle:
+    reviewEveryDays: 90
+    minimumDeprecationNoticeDays: 90
+    successorRequiredForBreakingChange: true
+    changeLog: contracts/changelog/commerce.order-performance.md
+

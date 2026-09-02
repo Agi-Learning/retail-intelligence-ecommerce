@@ -1,0 +1,33 @@
+{
+  "event_id": "018f4d65-0b49-7c67-9bc6-7a5d51f3f8ad",
+  "event_type": "OrderConfirmed",
+  "event_version": "2.0.0",
+  "aggregate_type": "Order",
+  "aggregate_id": "ord_01J1Z8KQ2E9R7H5M3N6P4T1V0X",
+  "occurred_at": "2026-09-01T12:30:45.123Z",
+  "published_at": "2026-09-01T12:30:46.012Z",
+  "producer": {
+    "service": "order-service",
+    "version": "2.4.1",
+    "domain": "commerce"
+  },
+  "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+  "correlation_id": "checkout_01J1Z8HZZZV4N1C8R5G7F3A2QW",
+  "causation_id": "018f4d64-fd9e-7c9b-8a31-0ab145f84e39",
+  "tenant_id": "retail",
+  "market_id": "IN",
+  "classification": "confidential",
+  "schema_ref": "registry://commerce.order-confirmed/2.0.0",
+  "payload": {
+    "order_id": "ord_01J1Z8KQ2E9R7H5M3N6P4T1V0X",
+    "customer_id": "cus_01J1Z7YR8BX41A0HPEK6N5M3TW",
+    "status": "CONFIRMED",
+    "currency": "INR",
+    "gross_amount": "2499.00",
+    "discount_amount": "200.00",
+    "net_amount": "2299.00",
+    "item_count": 3,
+    "confirmed_at": "2026-09-01T12:30:45.123Z"
+  }
+}
+

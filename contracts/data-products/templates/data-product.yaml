@@ -1,0 +1,30 @@
+apiVersion: retail.ecommerce/v1alpha1
+kind: DataProduct
+metadata:
+  id: TODO
+  name: TODO
+  domain: TODO
+  version: 0.1.0
+spec:
+  status: draft
+  purpose: TODO
+  type: source-aligned
+  owners:
+    business: TODO
+    technical: TODO
+    support: TODO
+  consumers: []
+  inputs: []
+  outputs: []
+  grain: TODO
+  keys: []
+  semantics: {}
+  quality: []
+  slos: {}
+  classification: internal
+  retention: TODO
+  lineage: []
+  runbook: TODO
+  lifecycle:
+    deprecationDate: null
+    successor: null

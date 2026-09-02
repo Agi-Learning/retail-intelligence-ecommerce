@@ -1,0 +1,8 @@
+domain: payment-risk
+owners:
+  business: TODO
+  engineering: TODO
+  dataProduct: TODO
+  security: TODO
+reviewers: []
+onCall: TODO

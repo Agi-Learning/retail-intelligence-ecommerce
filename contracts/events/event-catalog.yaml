@@ -1,0 +1,8 @@
+apiVersion: retail.ecommerce/v1alpha1
+kind: EventCatalog
+metadata:
+  name: retail-intelligence-ecommerce
+spec:
+  canonicalEnvelope: envelope/canonical-event-envelope.schema.json
+  compatibility: backward
+  events: []

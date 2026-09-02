@@ -1,0 +1,11 @@
+# Replace placeholders with valid GitHub users or teams before enforcement.
+* @OWNER
+/applications/frontend/ @FRONTEND_OWNER
+/applications/backend/ @BACKEND_OWNER
+/contracts/ @CONTRACT_OWNER
+/ingestion/ @DATA_ENGINEERING_OWNER
+/lakehouse/ @DATA_ENGINEERING_OWNER
+/machine-learning/ @ML_OWNER
+/ai/ @AI_OWNER
+/infrastructure/ @PLATFORM_OWNER
+/governance/ @GOVERNANCE_OWNER

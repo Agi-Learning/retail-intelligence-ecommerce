@@ -1,0 +1,13 @@
+apiVersion: retail.ecommerce/v1alpha1
+kind: Domain
+metadata:
+  name: supply
+spec:
+  status: planned
+  businessOwner: TODO
+  technicalOwner: TODO
+  services: []
+  dataProducts: []
+  support:
+    channel: TODO
+    runbook: TODO
